@@ -1,15 +1,21 @@
-<script setup lang="ts">
-</script>
 
 <template>
 <div class="wrapper">
-  <router-view>
-      <!-- <transition name="fade" mode="out-in">
+  <TopBar></TopBar>
+  <router-view  v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
         <component :is="Component" />
-      </transition> -->
+      </transition>
     </router-view>
 </div>
 </template>
+
+<script setup lang="ts">
+import TopBar from "./components/BrotherComponent/TopBar.vue"
+
+</script>
+
+
 
 <style>
 </style>
