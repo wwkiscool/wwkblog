@@ -1,10 +1,10 @@
 import { createRouter,createWebHashHistory,RouteRecordRaw } from "vue-router";
-
+import BlogIndex from '../components/MainPage/BlogIndex.vue';
 const routes:Array<RouteRecordRaw> = [
     {
         path:'/',
-        name:"Home",
-        component:() => import('../pages/test/index.vue')
+        name:"BlogIndex",
+        component:BlogIndex
     }
 ]
 

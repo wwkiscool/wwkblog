@@ -61,57 +61,58 @@
   </div>
 </template>
 
-<script>
-  // import Store from '../../store';
-  // export default {
-  //   name: "PcTopBar",
+<!-- <script>
+  import Store from '../../store';
+  export default {
+    name: "PcTopBar",
 
-  //   data: function () {
-  //     return {
-  //       OpenMobileMenu: false //移动端菜单详情伸开、关闭
-  //     }
-  //   },
+    data: function () {
+      return {
+        OpenMobileMenu: false //移动端菜单详情伸开、关闭
+      }
+    },
 
-  //   methods: {
-  //     /**
-  //      * 跳转路由
-  //      * @param url 跳转的Url
-  //      * @constructor
-  //      */
-  //     ChangeRouter: function (url) {
-  //       var That = this;
+    methods: {
+      /**
+       * 跳转路由
+       * @param url 跳转的Url
+       * @constructor
+       */
+      ChangeRouter: function (url) {
+        var That = this;
 
-  //       That.$router.push({
-  //         name: url,
-  //       });
-  //     },
+        That.$router.push({
+          name: url,
+        });
+      },
 
-  //     openUrl:function(){
-  //       window.open('http://39.104.22.73:68/#/','_blank');
-  //       // 创建日志
-  //       this.createLog({
-  //         moduleType:'menu',
-  //         operateType:'选择菜单',
-  //         operateContent:'管理后台'
-  //       });
-  //     },
+      openUrl:function(){
+        window.open('http://39.104.22.73:68/#/','_blank');
+        // 创建日志
+        this.createLog({
+          moduleType:'menu',
+          operateType:'选择菜单',
+          operateContent:'管理后台'
+        });
+      },
 
-  //     // 伸缩 移动端菜单详情
-  //     OpenMenu: function () {
-  //       this.OpenMobileMenu = !this.OpenMobileMenu;
-  //     }
-  //   },
-  //   computed:{
-  //     Active(){
-  //       return Store.state.Active;
-  //     }
-  //   }
-  // }
-</script>
+      // 伸缩 移动端菜单详情
+      OpenMenu: function () {
+        this.OpenMobileMenu = !this.OpenMobileMenu;
+      }
+    },
+    computed:{
+      Active(){
+        return Store.state.Active;
+      }
+    }
+  }
+ </script> -->
 <script lang="ts" setup>
   import { ref,reactive } from "vue";
   import { useRouter } from "vue-router"
   let OpenMobileMenu = ref(false);
+  let Active = ref(0)
   const router = useRouter();
 
   /**
@@ -461,9 +462,11 @@
 
   .MenuItem {
     padding: 0 30px;
+    white-space: nowrap;
   }
 
   .MenuItemActive {
+    white-space: nowrap;
     padding: 0 30px;
     cursor: pointer;
     border-bottom: 2px solid @ThemeColor;
