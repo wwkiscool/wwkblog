@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 // let baseURL = "http://localhost:3000" // 切换地址
-let baseURL = "/api"
+let baseURL = ""
 
 const service = axios.create({
     baseURL,
@@ -12,6 +12,8 @@ const service = axios.create({
 
 service.interceptors.request.use( //请求拦截器
     config=>{
+        console.log("config.url",config.url);
+        
         config.url = baseURL+ config.url;
         return config
     },
