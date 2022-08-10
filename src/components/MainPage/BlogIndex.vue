@@ -9,16 +9,16 @@
               class="BlogIndexContentLeftDefaultGraph">
             <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
               @click="UpdateRouter('BlogDetail', item)">
-              <div class="ArticleItemCover" v-if="item.ArticleCover">
-                <img :src="item.ArticleCover">
+              <div class="ArticleItemCover" v-if="item['ArticleCover']">
+                <img :src="item['ArticleCover']">
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">
                   <!-- <div class="ArticleTag">{{ item.ArticleTag }}</div> -->
-                  <h3 class="ArticleTitleText">{{ item.Title }}</h3>
+                  <h3 class="ArticleTitleText">{{ item['Title'] }}</h3>
                 </div>
                 <div class="ArticleContent">
-                  {{ item.Summary }}
+                  {{ item['Summary'] }}
                 </div>
                 <div class="ArticleFooter">
                   <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
@@ -27,23 +27,23 @@
                     <i class="iconfont icon-yueduliang iconBlogIndex"></i>1000
                   </div>-->
                   <div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.ArticleTag }}
+                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item['ArticleTag'] }}
                   </div>
                   <div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
+                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item['CreateDate'] }}
                   </div>
                   <div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-yueduliang iconBlogIndex"></i>{{ item.articleReadNum ? item.articleReadNum :
+                    <i class="iconfont icon-yueduliang iconBlogIndex"></i>{{ item['articleReadNum'] ? item['articleReadNum'] :
                         0
                     }}
                   </div>
-                  <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
-                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
+                  <div class="ArticleFooterItem" style="border: none" v-show="item['CommentNum']">
+                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item['CommentNum'] }}
                   </div>
                 </div>
               </div>
             </div>
-            <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
+            <div class="NoDataHint" v-if="!ArticleList['length']">暂无数据</div>
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
@@ -56,22 +56,22 @@
               <div class="HotArticle">
                 <div class="HotArticleItem" v-for="(Item, Index) in HotArticleList" v-bind:key="Index">
                   <div v-if="Index == 0" @click="UpdateRouter('BlogDetail', Item)">
-                    <span style="color:#f44e03;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span style="color:#f44e03;font-size: 15px">No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                   <div v-if="Index == 1" @click="UpdateRouter('BlogDetail', Item)">
-                    <span style="color:#d41800;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span style="color:#d41800;font-size: 15px">No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                   <div v-if="Index == 2" @click="UpdateRouter('BlogDetail', Item)">
-                    <span style="color:#f37e21;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span style="color:#f37e21;font-size: 15px">No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                   <div v-if="Index == 3" @click="UpdateRouter('BlogDetail', Item)">
-                    <span style="color:#f3212d;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span style="color:#f3212d;font-size: 15px">No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                   <div v-if="Index == 4" @click="UpdateRouter('BlogDetail', Item)">
-                    <span style="color:#212df3;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span style="color:#212df3;font-size: 15px">No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                   <div v-if="Index > 4" @click="UpdateRouter('BlogDetail', Item)">
-                    <span>No{{ Index + 1 }} </span>{{ Item.Title }}
+                    <span>No{{ Index + 1 }} </span>{{ Item['Title'] }}
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
-                孙权的小博客
+                小博客
                 <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
                   target="_blank" @click="readCode()">博客源码</a>
               </div>
@@ -107,265 +107,171 @@
               </transition>
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
-                <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
-                  :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
+                <div :class="item['TagName'] != TagsActive ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
+                  :key="item['id']" @click="GetArticle(item['TagName'])">{{ item['TagName'] }}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Heartfelt></Heartfelt>
+      <!-- <Heartfelt></Heartfelt> -->
     </div>
   </transition>
 </template>
-
-<!-- <script>
-  import Heartfelt from '../SonCompnent/Heartfelt';
-  import Pagination from '../SonCompnent/Pagination';
-  import Store from '../../store'
-  import axios from "axios";
-
-  export default {
-    name: "BlogIndex",
-    components: {
-      Heartfelt,
-      Pagination
-    },
-    data: function () {
-      return {
-        Tags: [],// 标签量
-        ArticleList: [],// 文章列表        
-        ArticleNum: 0,// 文章量     
-        LeaveMessageNum: 0,// 留言量        
-        CommentNum: 0,// 博客评论量
-        HotArticleList: [],// 热门文章列表
-        AticleBottom: false,// 文章底线
-        buttonAnimate: false, // 首页源码入口动画效果
-        // 缺省图
-        DefaultGraph: {
-          ArticleListPart: true,
-          HotArticlePart: true,
-          ArticleTagPart: true
-        }
-      }
-    },
-    methods: {
-      InitArticleTag: function (That) {
-        // 初始化标签列表
-        this.SQFrontAjax({
-          Url: '/api/TagRead/foreend',
-          Success: function (data) {
-            That.Tags = data;
-            That.Tags.Active = '';
-            That.DefaultGraph.ArticleTagPart = false;
-          }
-        });
-
-        // 获取文章列表
-        this.GetArticle('');
-        //渲染文章
-        this.GetArticleNum();
-        //渲染留言个数
-        this.GetLeaveMessageNum();
-        // 渲染评论个数
-        this.GetCommentNum();
-        //渲染热门博文
-        this.GetHotArticle();
-      },
-      // 获取文章列表
-      GetArticle: function (ArticleTag) {
-        var That = this;
-
-        this.SQFrontAjax({
-          Url: '/api/ArticleRead/foreend',
-          UploadData: {
-            PagnationData: {
-              Skip: 0,
-              Limit: 8
-            },
-            ArticleTag: ArticleTag
-          },
-          Success: function (data) {
-            // 高亮
-            That.Tags.Active = ArticleTag;
-
-            data.forEach(function (Item) {
-              Item.CreateDate = Item.CreateDate.slice(0, 10);
-            });
-            That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
-            That.ArticleList = data;
-
-            // 创建日志 只有在筛选某个标签后，再记录日志
-            if (ArticleTag) That.createLog({
-              moduleType: 'button',
-              operateType: '筛选文章分类',
-              operateContent: ArticleTag
-            });
-          }
-        });
-      },
-      // 获取留言数量
-      GetLeaveMessageNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getmessagenum',
-          Success: function (data) {
-
-            var NumInterval = window.setInterval(function () {
-              That.LeaveMessageNum += 1;
-              if (data == That.LeaveMessageNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
-      },
-      //处理翻页
-      ValueByPagition: function (SelectPage) {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/ArticleRead/foreend',
-          UploadData: {
-            PagnationData: {
-              Skip: SelectPage * 8,
-              Limit: 8
-            },
-            ArticleTag: That.Tags.Active
-          },
-          Success: function (data) {
-            data.forEach(function (Item) {
-              Item.CreateDate = Item.CreateDate.slice(0, 10);
-            });
-            That.ArticleList = That.ArticleList.concat(data);
-            if (data.length != 8) {
-              That.AticleBottom = true;
-              // 停止分页器的滚动监听
-              That.$refs.Pagi.SetUpdate(false);
-            } else {
-              That.$refs.Pagi.SetUpdate(true);
-
-              // 创建日志
-              That.createLog({
-                moduleType: 'pageTurn',
-                operateType: '下拉文章列表到',
-                operateContent: '第' + (SelectPage + 1) + '页'
-              });
-            }
-          }
-        });
-      },
-      // 获取评论数量
-      GetCommentNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getcommentnum',
-          Success: function (data) {
-
-            var NumInterval = window.setInterval(function () {
-              That.CommentNum += 1;
-              if (data == That.CommentNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
-      },
-      // 切换路由
-      UpdateRouter: function (RouterName, articleMessage) {
-        if (articleMessage._id) {
-          this.$router.push({
-            name: RouterName,
-            query: {
-              _id:articleMessage._id,
-              Title:articleMessage.Title,
-              from:'首页'
-            }
-          });
-        } else {
-          this.bus.$emit('TopBar', {
-            Active: 1,
-            MobileMenuActive: 1
-          });
-          this.$router.push({
-            name: RouterName
-          });
-        }
-      },
-      //获取文章数量
-      GetArticleNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getarticlenum/foreend',
-          Success: function (data) {
-            var NumInterval = window.setInterval(function () {
-              That.ArticleNum += 1;
-              if (data == That.ArticleNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
-      },
-      //获取热门文章
-      GetHotArticle: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/HotArticleRead/foreend',
-          Success: function (data) {
-            That.HotArticleList = data;
-            That.DefaultGraph.HotArticlePart = false;
-          }
-        });
-      },
-      // 查看源码
-      readCode: function () {
-        // 创建日志
-        this.createLog({
-          moduleType: 'button',
-          operateType: '查看源码',
-          operateContent: '首页入口'
-        });
-      },
-      // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
-      enter: function(status){
-        this.buttonAnimate = status;
-      }
-    },
-    mounted: function () {
-      let that = this;
-
-      this.InitArticleTag(this);
-      Store.commit("ChangeActive", 0); // 切换Topbar高亮
-
-      // 创建日志
-      that.createLog({
-        moduleType: 'menu',
-        operateType: '选择菜单',
-        operateContent: '博文'
-      });
-    },
-  }
-</script> -->
 <script setup lang="ts">
 //ts重构
-import { getArticleList } from "../../apis/index"
-import { ref, toRefs, reactive } from "vue"
+import { GetHotArticle, getTagRed, getArticleRead } from "../../apis/index"
+import { ref, toRefs, reactive, defineAsyncComponent, type DefineComponent,getCurrentInstance } from "vue"
+import { useRouter } from "vue-router"
+
+//数据初始化 --------start
 let DefaultGraph = reactive({
   ArticleListPart: true,
   HotArticlePart: true,
   ArticleTagPart: true
 })
-let ArticleList = reactive([]);// 文章列表
+let ArticleList = ref([]);// 文章列表
+let Tags = ref([]);
+const router = useRouter();
+let HotArticleList = ref([])
+let buttonAnimate = ref(false)
+let AticleBottom = ref(false);
+let ArticleNum = ref(0);
+let LeaveMessageNum = ref(0);
+let CommentNum = ref(0);
+let TagsActive = ref('')
+const instance = getCurrentInstance(); // 获取当前实例  
+console.log("instance",instance);
+const Pagi = ref();
+
+//数据初始化 --------end
+// 子组件 ---------start
+
+const Heartfelt = defineAsyncComponent<DefineComponent>(
+  () => import('../SonCompnent/Heartfelt.vue') as any
+)
+const Pagination = defineAsyncComponent<DefineComponent>(
+  () => import('../SonCompnent/Pagination.vue') as any
+)
+
+// 子组件 ---------end
+//接口 ---------start
 let _getArticleList = async () => {
-  let params = {
-    Skip: 0,
-    Limit: 8,
-    ArticleTag:""
+  let res = await GetHotArticle();
+  if (res.status == 0) {
+    HotArticleList.value = res.data;
+    DefaultGraph.HotArticlePart = false;
   }
-  let res = await getArticleList(params)
 }
-_getArticleList()
+
+let _getTagRed = async () => {
+  try {
+    let res = await getTagRed();
+    if (res.status == 0) {
+      Tags.value = res.data;
+      DefaultGraph.ArticleTagPart = false;
+    }
+    console.log(Tags);
+
+  } catch (error) {
+    console.error(error);
+
+  }
+}
+const GetArticle = async (ArticleTag: string) => {
+  try {
+    TagsActive.value = ArticleTag
+    let data = {
+      PagnationData: {
+        Skip: 0,
+        Limit: 8,
+      },
+      ArticleTag
+    }
+    let res = await getArticleRead(data);
+    if (res.status == 0) {
+      res.data.forEach(function (Item: { CreateDate: string }) {
+        Item.CreateDate = Item.CreateDate.slice(0, 10);
+      });
+      DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
+      ArticleList.value = res.data;
+      console.log(ArticleList.value);
+      
+    }
+
+  } catch (error) {
+
+  }
+}
+_getTagRed() // 初始化标签列表
+_getArticleList() //热门文章 
+GetArticle('')
+//接口 ----------------end
+
+//methods ----------------start
+
+const UpdateRouter = (RouterName: string, articleMessage: { [key:string]:any }) => {
+  if (articleMessage._id) { // 还没写暂时注释
+    // router.push({
+    //   name: RouterName,
+    //   query: {
+    //     _id: articleMessage._id,
+    //     Title: articleMessage.Title,
+    //     from: '首页'
+    //   }
+    // });
+  } else {
+    // this.bus.$emit('TopBar', {
+    //         Active: 1,
+    //         MobileMenuActive: 1
+    //       });
+    router.push({
+      name: RouterName
+    });
+  }
+}
+console.log("SetUpdate",Pagi);
+const ValueByPagition = async (SelectPage:number) => {
+  //获取子组件的值
+  let data = {
+      PagnationData: {
+        Skip: SelectPage * 8,
+        Limit: 8,
+      },
+      ArticleTag:TagsActive.value
+    }
+    let res = await getArticleRead(data);
+    if (res.status == 0) {
+      res.data.forEach(function (Item: { CreateDate: string }) {
+        Item.CreateDate = Item.CreateDate.slice(0, 10);
+      });
+      // DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
+      ArticleList.value = ArticleList.value.concat(res.data);
+      if(res.data.length !=8) {
+        AticleBottom.value = true;
+        // 移除滚动监听
+        console.log("value",Pagi.value);
+        
+        Pagi.value.SetUpdate(false);
+      } else {
+        // 创建日志\
+        Pagi.value.SetUpdate(true);
+      }
+    }
+}
+const enter = (status: boolean) => {
+  buttonAnimate.value = status;
+}
+const readCode = () => {
+  //创建日志
+}
+
+
+//methods ----------------end
+
+
 </script>
 <style scoped lang="less">
+@import "../../static/css/BlogIndex";
 </style>
