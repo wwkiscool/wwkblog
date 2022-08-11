@@ -124,6 +124,7 @@
 import { GetHotArticle, getTagRed, getArticleRead } from "../../apis/index"
 import { ref, toRefs, reactive, defineAsyncComponent, type DefineComponent,getCurrentInstance } from "vue"
 import { useRouter } from "vue-router"
+import { useStore } from "vuex";
 
 //数据初始化 --------start
 let DefaultGraph = reactive({
@@ -144,6 +145,7 @@ let TagsActive = ref('')
 const instance = getCurrentInstance(); // 获取当前实例  
 console.log("instance",instance);
 const Pagi = ref();
+const store = useStore();
 
 //数据初始化 --------end
 // 子组件 ---------start
@@ -234,6 +236,7 @@ const UpdateRouter = (RouterName: string, articleMessage: { [key:string]:any }) 
 console.log("SetUpdate",Pagi);
 const ValueByPagition = async (SelectPage:number) => {
   //获取子组件的值
+  store.commit('ChangeLoading',true)
   let data = {
       PagnationData: {
         Skip: SelectPage * 8,
@@ -242,6 +245,7 @@ const ValueByPagition = async (SelectPage:number) => {
       ArticleTag:TagsActive.value
     }
     let res = await getArticleRead(data);
+    store.commit('ChangeLoading',false)
     if (res.status == 0) {
       res.data.forEach(function (Item: { CreateDate: string }) {
         Item.CreateDate = Item.CreateDate.slice(0, 10);
@@ -259,6 +263,7 @@ const ValueByPagition = async (SelectPage:number) => {
         Pagi.value.SetUpdate(true);
       }
     }
+    
 }
 const enter = (status: boolean) => {
   buttonAnimate.value = status;
