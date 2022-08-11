@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-// let baseURL = "http://localhost:3000" // 切换地址
-let baseURL = ""
+// let baseURL = "http://localhost:8888" // 切换地址
+let baseURL = import.meta.env.VITE_BASE_URL
 
 const service = axios.create({
     baseURL,
@@ -12,9 +12,9 @@ const service = axios.create({
 
 service.interceptors.request.use( //请求拦截器
     config=>{
-        console.log("config.url",config.url);
+        console.log("config.url",config);
         
-        config.url = baseURL+ config.url;
+        // config.url =config.url;
         return config
     },
     error=>{

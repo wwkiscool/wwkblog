@@ -1,5 +1,7 @@
 <template>
+<div class="CanvasBackStyle">
   <Particles id="tsparticles" :options="options" :particlesInit="particlesInit" :particlesLoaded="particlesLoaded" />
+</div>
 </template>
 <script lang="ts" setup>
 import { reactive, toRefs } from 'vue';
@@ -83,7 +85,7 @@ const particlesInit = async (engine: any) => {
   await loadFull(engine)
 }
 const particlesLoaded = async (container: any) => {
-  console.log('Particles container loaded', container)
+  // console.log('Particles container loaded', container)
 }
 </script>
 
@@ -94,7 +96,7 @@ const particlesLoaded = async (container: any) => {
 }
 
 /*pc端*/
-/* @media only screen and (min-device-width: 768px) {
+@media only screen and (min-device-width: 768px) {
   .CanvasBackStyle {
     position: fixed;
     z-index: -1;
@@ -104,12 +106,12 @@ const particlesLoaded = async (container: any) => {
     bottom: 0;
     display: block;
   }
-} */
+}
 
 /*移动端*/
-/* @media only screen and (max-device-width: 768px) {
+@media only screen and (max-device-width: 768px) {
   .CanvasBackStyle {
     display: none;
   }
-} */
+}
 </style>

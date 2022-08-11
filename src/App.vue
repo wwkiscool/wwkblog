@@ -2,11 +2,7 @@
 <template>
   <div class="wrapper">
     <TopBar></TopBar>
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <router-view></router-view>
     <Footer></Footer>
     <Loading></Loading>
     <CanvasBac></CanvasBac>
