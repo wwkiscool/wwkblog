@@ -110,6 +110,7 @@
 <script lang="ts" setup>
 import { ref, reactive, defineComponent, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { useRouter } from "vue-router"
+import { GetHotArticle } from "../../apis/index"
 let OpenMobileMenu = ref(false);
 let Active = ref(0)
 const router = useRouter();
@@ -122,6 +123,12 @@ const ChangeRouter = (url: string) => {
     name: url
   })
 }
+let _getArticleList = async () => {
+  let res = await GetHotArticle();
+  if (res.status == 0) {
+  }
+}
+_getArticleList();
 
 const openUrl = () => {
   //打开后台管理

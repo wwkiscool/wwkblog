@@ -215,14 +215,14 @@ GetArticle('')
 
 const UpdateRouter = (RouterName: string, articleMessage: { [key:string]:any }) => {
   if (articleMessage._id) { // 还没写暂时注释
-    // router.push({
-    //   name: RouterName,
-    //   query: {
-    //     _id: articleMessage._id,
-    //     Title: articleMessage.Title,
-    //     from: '首页'
-    //   }
-    // });
+    router.push({
+      name: RouterName,
+      query: {
+        _id: articleMessage._id,
+        Title: articleMessage.Title,
+        from: '首页'
+      }
+    });
   } else {
     // this.bus.$emit('TopBar', {
     //         Active: 1,
@@ -252,6 +252,7 @@ const ValueByPagition = async (SelectPage:number) => {
       });
       // DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
       ArticleList.value = ArticleList.value.concat(res.data);
+      console.log("========》",Pagi.value);
       if(res.data.length !=8) {
         AticleBottom.value = true;
         // 移除滚动监听

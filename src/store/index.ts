@@ -33,7 +33,27 @@ const state: state = {
 const mutations = {
     ChangeLoading(state:state,value:boolean) {
         state.loading = value;
-    }
+    },
+    // 表情包组件
+    ChangeEmotionShow:function (State:state,Value:boolean) {
+        State.EmotionShow = Value;
+      },
+    // 留言组件
+    AppendMessageText (state:state,Value:string) {
+        state.MessageText += Value;
+      },
+      CleanMessageText (state:state) {
+        state.MessageText = '';
+      },
+      ChangeMessageText (state:state,Value:string) {
+        state.MessageText = Value;
+      },
+      // Tips组件
+    ChangeTip:function (State:state,Value:{Show:boolean,Title:string}) {
+        State.Tips.Show = Value.Show;
+        State.Tips.Title = Value.Title;
+      },
+  
 }
 const store = createStore({
     state,

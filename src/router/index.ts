@@ -7,17 +7,17 @@ import BlogDetail from '@/components/MainPage/BlogDetail.vue';
 // import TimeLine from '@/components/MainPage/TimeLine.vue';
 // import AboutMe from '@/components/MainPage/AboutMe.vue';
 // import analytics from '@/components/MainPage/analytics.vue';
-const routes:Array<RouteRecordRaw> = [
+const routes = [
     {
         path:'/',
         name:"BlogIndex",
-        component:BlogIndex
+        component:() => import('@/components/MainPage/BlogIndex.vue')
     },
-    //  {
-    //     path: '/BlogDetail',
-    //     name: 'BlogDetail',
-    //     component: BlogDetail
-    //   },
+     {
+        path: '/BlogDetail',
+        name: 'BlogDetail',
+        component: () => import('@/components/MainPage/BlogDetail.vue')
+      },
     //    {
     //     path: '/MessageBoard',
     //     name: 'MessageBoard',
@@ -42,7 +42,7 @@ const routes:Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-    history:createWebHistory(),
+    history:createWebHashHistory(),
     routes
 })
 

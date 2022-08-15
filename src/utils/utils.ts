@@ -1,4 +1,5 @@
-import { App } from "vue";
+import { App, readonly } from "vue";
+import axios,{AxiosRequestConfig, AxiosResponse} from "axios";
 export const formatDate = (val: string): string => { //格式化时间
     let date;
     if (val) {
@@ -106,59 +107,71 @@ CommonFunction.install = function (APP: App<Element>) {
         }
     }
     interface dataStorage {
-        Key:string,
-        Value:object
+        Key: string,
+        Value: object
     }
-    APP.config.globalProperties.SetLocalStorage = function (StorageName:string, Data:dataStorage):void {
+    APP.config.globalProperties.SetLocalStorage = function (StorageName: string, Data: dataStorage): void {
         let Storage = localStorage.getItem(StorageName);
         // 如果表存在，修改表中字段名
-        
+
         let objKey = Data.Key;
         if (Storage) {
-          // 将表的值转为对象，并装入传入的字段
-          let StorageObject = JSON.parse(Storage);
-          StorageObject[Data.Key] = Data.Value;
-          // 重新将存储
-          localStorage.setItem(StorageName, JSON.stringify(StorageObject));
+            // 将表的值转为对象，并装入传入的字段
+            let StorageObject = JSON.parse(Storage);
+            StorageObject[Data.Key] = Data.Value;
+            // 重新将存储
+            localStorage.setItem(StorageName, JSON.stringify(StorageObject));
         }
         //如果表不存在直接存储
-       /**
-        * 未知属性  判断类型方式
-        * @type:1
-        * let obj: { [key:string]:any }= {}
-        * @type: 2
-        * let obj: Record<string,any>= {}
-        */
+        /**
+         * 未知属性  判断类型方式
+         * @type:1
+         * let obj: { [key:string]:any }= {}
+         * @type: 2
+         * let obj: Record<string,any>= {}
+         */
         else {
-          let Object:{[key:string]:any} = {};
-          Object[Data.Key] = Data.Value;
-          localStorage.setItem(StorageName, JSON.stringify(Object));
+            let Object: { [key: string]: any } = {};
+            Object[Data.Key] = Data.Value;
+            localStorage.setItem(StorageName, JSON.stringify(Object));
         }
-      };
-      APP.config.globalProperties.MatchEmotion = function (data:String) {
+    };
+    APP.config.globalProperties.MatchEmotion = function (data: String) {
         let EmotionList = ['微笑', '撇嘴', '色', '发呆', '得意', '流泪', '害羞', '闭嘴', '睡', '大哭',
-          '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱',
-          '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘',
-          '晕', '折磨', '衰', '骷髅', '敲打', '再见', '擦汗', '抠鼻', '鼓掌', '糗大了', '坏笑', '左哼哼',
-          '右哼哼', '哈欠', '鄙视', '委屈', '快哭了', '阴险', '亲亲', '吓', '可怜', '菜刀', '西瓜', '啤酒',
-          '篮球', '乒乓', '咖啡', '饭', '猪头', '玫瑰', '凋谢', '示爱', '爱心', '心碎', '蛋糕', '闪电', '炸弹',
-          '刀', '足球', '瓢虫', '便便', '月亮', '太阳', '礼物', '拥抱', '强', '弱', '握手', '胜利', '抱拳', '勾引',
-          '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手',
-          '激动', '街舞', '献吻', '左太极', '右太极'];
-    
+            '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱',
+            '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘',
+            '晕', '折磨', '衰', '骷髅', '敲打', '再见', '擦汗', '抠鼻', '鼓掌', '糗大了', '坏笑', '左哼哼',
+            '右哼哼', '哈欠', '鄙视', '委屈', '快哭了', '阴险', '亲亲', '吓', '可怜', '菜刀', '西瓜', '啤酒',
+            '篮球', '乒乓', '咖啡', '饭', '猪头', '玫瑰', '凋谢', '示爱', '爱心', '心碎', '蛋糕', '闪电', '炸弹',
+            '刀', '足球', '瓢虫', '便便', '月亮', '太阳', '礼物', '拥抱', '强', '弱', '握手', '胜利', '抱拳', '勾引',
+            '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手',
+            '激动', '街舞', '献吻', '左太极', '右太极'];
+
         //获取由所有双中括号的汉语组成的数组
         let EmoticonChineseArray = data.match(/\[\[.*?\]\]/g);  //如果匹配到返回数据，匹配不到返回null,如[ '[[微笑]]','[[撇嘴]]' ]。因为es6不支持断言，只能处理成这样
         // 将数组中的各项，替换为<img src='1.gif'>
         if (EmoticonChineseArray) {
-          EmoticonChineseArray.forEach(function (Item) {
-            Item = Item.replace(/\[|\]/g, '');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
-            data = data.replace(/\[\[.*?\]\]/, '<img style="vertical-align:bottom" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
-          });
+            EmoticonChineseArray.forEach(function (Item) {
+                Item = Item.replace(/\[|\]/g, '');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
+                data = data.replace(/\[\[.*?\]\]/, '<img style="vertical-align:bottom" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
+            });
         }
-    
-        return data;
-      };
 
+        return data;
+    };
+    APP.config.globalProperties.getIpLocation = async (func:(name:string,ip:string)=>void) =>{
+        interface res {
+           readonly cip:string,
+           readonly cname:string 
+        }
+        let res: AxiosResponse<res> = await axios({
+            url: 'https://pv.sohu.com/cityjson?ie=utf-8',
+            method: 'post'
+          });
+          res.cip = res.cip.replace('::ffff:','');
+          // resp.cname = resp.cname;
+          func(res.cname, res.cip);
+      };
 
 }
 export default CommonFunction
