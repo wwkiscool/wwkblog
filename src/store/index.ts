@@ -29,8 +29,17 @@ const state: state = {
         Title: ''
     }
 }
+const getters = {
+  GetMessageText(state:state) {
+    return state.MessageText
+  }
+}
 
 const mutations = {
+  // 顶部导航栏
+  ChangeActive:function (state:state,value:number) {
+    state.Active = value;
+  },
     ChangeLoading(state:state,value:boolean) {
         state.loading = value;
     },
@@ -57,6 +66,7 @@ const mutations = {
 }
 const store = createStore({
     state,
+    getters,
     mutations
 });
 export default store

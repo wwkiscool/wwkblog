@@ -18,11 +18,12 @@ const routes = [
         name: 'BlogDetail',
         component: () => import('@/components/MainPage/BlogDetail.vue')
       },
-    //    {
-    //     path: '/MessageBoard',
-    //     name: 'MessageBoard',
-    //     component: MessageBoard
-    //   }, {
+       {
+        path: '/MessageBoard',
+        name: 'MessageBoard',
+        component: () => import('@/components/MainPage/MessageBoard.vue')
+      },
+      //  {
     //     path: '/FriendUrl',
     //     name: 'FriendUrl',
     //     component: FriendUrl
@@ -30,11 +31,13 @@ const routes = [
     //     path:'/TimeLine',
     //     name:'TimeLine',
     //     component:TimeLine
-    //   }, {
-    //     path:'/AboutMe',
-    //     name:'AboutMe',
-    //     component:AboutMe
-    //   },{
+    //   }, 
+    {
+        path:'/AboutMe',
+        name:'AboutMe',
+        component:() => import('@/components/MainPage/AboutMe.vue')
+      }
+    // ,{
     //     path:'/analytics',
     //     name:'analytics',
     //     component:analytics

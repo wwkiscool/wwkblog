@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <div class="PcTopBar">
       <div class="MoveingLight"></div>
       <div class="MediaIndexContent">
@@ -108,13 +108,13 @@
   }
  </script> -->
 <script lang="ts" setup>
-import { ref, reactive, defineComponent, getCurrentInstance, ComponentInternalInstance } from "vue";
+import { ref,computed } from "vue";
 import { useRouter } from "vue-router"
-import { GetHotArticle } from "../../apis/index"
+import { useStore } from "vuex";
 let OpenMobileMenu = ref(false);
-let Active = ref(0)
+// let Active = ref(0)
 const router = useRouter();
-
+const store = useStore();
 /**
  * methods
  */
@@ -123,12 +123,8 @@ const ChangeRouter = (url: string) => {
     name: url
   })
 }
-let _getArticleList = async () => {
-  let res = await GetHotArticle();
-  if (res.status == 0) {
-  }
-}
-_getArticleList();
+
+let Active = computed(() => store.state.Active)
 
 const openUrl = () => {
   //打开后台管理
@@ -144,6 +140,9 @@ const OpenMenu = () => {
 
 /*pc端*/
 @media only screen and (min-device-width: 768px) {
+  .container  {
+    padding-top: 60px;
+  } 
   .PcTopBar {
     background-color: @TranslucentWhitleBackg;
     color: @FontColorGray;
@@ -153,6 +152,7 @@ const OpenMenu = () => {
     top: 0;
     width: 100%;
     z-index: 10000;
+    
   }
 
   .MobileTopBar {
@@ -179,6 +179,7 @@ const OpenMenu = () => {
 @media only screen and (max-device-width: 768px) {
   .PcTopBar {
     display: none;
+    
   }
 
   .MobileTopBar {
@@ -467,6 +468,7 @@ const OpenMenu = () => {
 .MobileTopBarLogo {
   flex: 1;
   cursor: pointer;
+  padding-top: 4.3rem;
 }
 
 .MenuTopBarIcon {

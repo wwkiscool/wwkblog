@@ -12,6 +12,7 @@ const getArticleOne = async (data:{[key:string]:any}) => await service.post('/Ar
 
 const GetCommentList = async (data:{[key:string]:any})=> await service.post('/ArticleCommentRead/foreend',data)
 
+const createArticleComment = async (data:{[key:string]:any}) => await service.post('/ArticleCommentCreate/foreend',data)
 
 
 
@@ -35,5 +36,6 @@ export  {
     getTagRed,
     getArticleRead,
     getArticleOne,
-    GetCommentList
+    GetCommentList,
+    createArticleComment
 }

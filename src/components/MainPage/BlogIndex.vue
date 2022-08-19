@@ -1,7 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
     <div>
-      <div class="TopBarHeight"></div>
+      <!-- <div class="TopBarHeight"></div> -->
       <div class="BlogIndexContent">
         <div class="BlogFlex">
           <div class="BlogIndexContentLeft">
@@ -146,7 +146,7 @@ const instance = getCurrentInstance(); // 获取当前实例
 console.log("instance",instance);
 const Pagi = ref();
 const store = useStore();
-
+store.commit('ChangeActive',0)
 //数据初始化 --------end
 // 子组件 ---------start
 

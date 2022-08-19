@@ -1,5 +1,5 @@
 import { App, readonly } from "vue";
-import axios,{AxiosRequestConfig, AxiosResponse} from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 export const formatDate = (val: string): string => { //格式化时间
     let date;
     if (val) {
@@ -159,19 +159,19 @@ CommonFunction.install = function (APP: App<Element>) {
 
         return data;
     };
-    APP.config.globalProperties.getIpLocation = async (func:(name:string,ip:string)=>void) =>{
-        interface res {
-           readonly cip:string,
-           readonly cname:string 
-        }
-        let res: AxiosResponse<res> = await axios({
+
+    APP.config.globalProperties.getIpLocation = async (func: func) => {
+        let res: any = await axios({
             url: 'https://pv.sohu.com/cityjson?ie=utf-8',
-            method: 'post'
-          });
-          res.cip = res.cip.replace('::ffff:','');
-          // resp.cname = resp.cname;
-          func(res.cname, res.cip);
-      };
+            method: 'post',
+            params: {
+                key: 'ba5f9b69f0541123a4dbe142da230b4d'
+            },
+        });
+        //   res.cip = res.cip.replace('::ffff:','');
+        // resp.cname = resp.cname;
+        func(res);
+    };
 
 }
 export default CommonFunction

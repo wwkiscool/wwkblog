@@ -1,7 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
     <div>
-      <div class="TopBarHeight"></div>
+      <!-- <div class="TopBarHeight"></div> -->
       <div class="ArticleDetailHeader">
         <img :src="Article['ArticleCover']" />
         <div class="HeaderContent" v-if="!Article['ArticleCover']">
@@ -94,7 +94,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, computed, toRefs, getCurrentInstance } from "vue";
-import { getArticleOne, GetCommentList } from "../../apis/index";
+import { getArticleOne, GetCommentList, createArticleComment } from "../../apis/index";
 import { useRoute } from "vue-router";
 import { marked } from 'marked';
 import { useStore } from "vuex";
@@ -187,7 +187,7 @@ const OpenEmotions = () => {
 
   EmotionB.value.OpenEmotion(true);
 }
-const CommentSubmit = () => {
+const CommentSubmit = async () => {
   //提交评论
   /**
    * 1.先获取定位
@@ -202,7 +202,47 @@ const CommentSubmit = () => {
     });
     return;
   }
-  
+  // 这里暂时不获取地点了 
+  // 1.问题：axios 配置ts类型
+  // 2.找一个免费的接口
+  // proxy.getIpLocation((location:any) => {
+  //   console.log(location);
+
+  // })
+  let MatchedMessageText = proxy.MatchEmotion(store.getters.GetMessageText);
+  let now = proxy.$DateFormat();
+  try {
+    let data = {
+      ArticleId: route.query._id,
+      ArticleName: Article.value.Title,
+      ArticleCommentNickName: ArticleCommentNickName.value,
+      ArticleCommentEmail: ArticleCommentEmail.value,
+      ArticleCommentUrl: ArticleCommentUrl.value,
+      ArticleCommentText: MatchedMessageText,
+      ArticleCommentDate: now,
+      LocationCityName: '武汉' // 默认给个地址 后面在弄
+    }
+    console.log("data", data);
+
+    let res = await createArticleComment(data);
+    if (res.status == 0) {
+      // 评论成功
+      store.commit('ChangeTip', {
+        Show: true,
+        Title: '留言成功!'
+      });
+      store.commit('CleanMessageText')
+      _GetCommentList()// 重新获取留言数据
+    } else {
+      store.commit('ChangeTip', {
+        Show: true,
+        Title: '留言失败!'
+      });
+    }
+  } catch (error) {
+
+  }
+
 }
 
 const AppendMessageText = () => {
@@ -225,6 +265,7 @@ _getArticleOne();
 
 
 _GetCommentList();
-<style scoped lang = "less" >
+</script>
+<style scoped lang = "less">
 @import "../../static/css/BlogDetail";
 </style>
