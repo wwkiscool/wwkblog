@@ -24,6 +24,8 @@ const Tips = computed({
 const ListenTips = computed(() => store.state.Tips.Show)
 watch(ListenTips, (newValue, oldValue) => {
     if (store.state.Tips.Show) {
+        console.log(2);
+        
         setTimeout(() => {
             // 显示两秒后自动关闭
             Tips.value.Show = false;

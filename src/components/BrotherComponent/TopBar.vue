@@ -8,9 +8,9 @@
         </div>
         <div class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">管理后台</div>
-          <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">访问统计</div>
+          <!-- <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">访问统计</div> -->
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('AboutMe')">关于</div>
-          <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">试验田</div>
+          <!-- <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">试验田</div> -->
           <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('TimeLine')">时间轴</div>
           <div :class="Active == 1 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('MessageBoard')">留言</div>
           <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('BlogIndex')">博文</div>

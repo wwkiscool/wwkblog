@@ -14,8 +14,9 @@ const GetCommentList = async (data:{[key:string]:any})=> await service.post('/Ar
 
 const createArticleComment = async (data:{[key:string]:any}) => await service.post('/ArticleCommentCreate/foreend',data)
 
-
-
+const GetMessageRead = async (data:{[key:string]:any}) => await service.post('/MessageRead/foreend',data)
+const MessageCreate = async (data:{[key:string]:any}) => await service.post('/MessageCreate/foreend',data)
+const GetTimeLineRead =async () => await service.post('/TimeLineRead/foreend')
 
 
 
@@ -37,5 +38,8 @@ export  {
     getArticleRead,
     getArticleOne,
     GetCommentList,
-    createArticleComment
+    createArticleComment,
+    GetMessageRead,
+    MessageCreate,
+    GetTimeLineRead
 }
