@@ -1,13 +1,13 @@
 import { createRouter,createWebHashHistory,RouteRecordRaw ,createWebHistory } from "vue-router";
 import { defineAsyncComponent } from "vue";
-// import MessageBoard from '@/components/MainPage/MessageBoard.vue';
-// import FriendUrl from '@/components/MainPage/FriendUrl.vue';
-// import TimeLine from '@/components/MainPage/TimeLine.vue';
-// import AboutMe from '@/components/MainPage/AboutMe.vue';
-// import analytics from '@/components/MainPage/analytics.vue';
 const routes = [
+  {
+    path:"/",
+    name:"首页",
+    component:defineAsyncComponent( () => import('@/components/MainPage/Home.vue'))
+  },
     {
-        path:'/',
+        path:'/BlogIndex',
         name:"BlogIndex",
         component: defineAsyncComponent( () => import('@/components/MainPage/BlogIndex.vue'))
     },

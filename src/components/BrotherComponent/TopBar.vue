@@ -24,9 +24,6 @@
           <span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : 'MenuButtonFirstGoClose'"></span>
           <span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : 'MenuButtonSecondGoClose'"></span>
           <span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : 'MenuButtonThirdGoClose'"></span>
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : ''"></span>-->
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : ''"></span>-->
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : ''"></span>-->
         </div>
       </div>
     </div>
@@ -59,54 +56,6 @@
     </div>
   </div>
 </template>
-
-<!-- <script>
-  import Store from '../../store';
-  export default {
-    name: "PcTopBar",
-
-    data: function () {
-      return {
-        OpenMobileMenu: false //移动端菜单详情伸开、关闭
-      }
-    },
-
-    methods: {
-      /**
-       * 跳转路由
-       * @param url 跳转的Url
-       * @constructor
-       */
-      ChangeRouter: function (url) {
-        var That = this;
-
-        That.$router.push({
-          name: url,
-        });
-      },
-
-      openUrl:function(){
-        window.open('http://39.104.22.73:68/#/','_blank');
-        // 创建日志
-        this.createLog({
-          moduleType:'menu',
-          operateType:'选择菜单',
-          operateContent:'管理后台'
-        });
-      },
-
-      // 伸缩 移动端菜单详情
-      OpenMenu: function () {
-        this.OpenMobileMenu = !this.OpenMobileMenu;
-      }
-    },
-    computed:{
-      Active(){
-        return Store.state.Active;
-      }
-    }
-  }
- </script> -->
 <script lang="ts" setup>
 import { ref,computed } from "vue";
 import { useRouter } from "vue-router"
