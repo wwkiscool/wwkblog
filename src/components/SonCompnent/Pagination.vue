@@ -11,7 +11,6 @@ const SetUpdate = (value:boolean) => {
 }
 defineExpose({SetUpdate})
 let emit = defineEmits(['PaginationToParent'])
-console.log("111",OnScroll);
 
 window && window.addEventListener('scroll', () => {
     let ScrollTop, ClientHeight, ScrollHeight;

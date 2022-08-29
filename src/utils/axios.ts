@@ -12,8 +12,6 @@ const service = axios.create({
 
 service.interceptors.request.use( //请求拦截器
     config=>{
-        console.log("config.url",config);
-        
         // config.url =config.url;
         return config
     },

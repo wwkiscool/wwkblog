@@ -8,12 +8,12 @@
     <CanvasBac></CanvasBac>
     <AirPlane></AirPlane>
   </div> -->
-    <Navigation></Navigation>
-    <div class="view-outer">
-      <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
-        <router-view class="view-page" />
-      </transition>
-    </div>
+  <Navigation></Navigation>
+  <div class="view-outer">
+    <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
+      <router-view class="view-page" />
+    </transition>
+  </div>
 
 </template>
 
@@ -33,6 +33,7 @@ function getScrollTop(): number | string {
 
 }
 function beforeLeave(node: any) {
+  
   let scrollTop = getScrollTop()
   window.scrollTo(0, 0)
   node.style.position = 'absolute'
@@ -50,6 +51,8 @@ function beforeLeave(node: any) {
 
 
 <style lang="less">
+@import url(./assets/css/base.less);
+
 .container {
   width: 90%;
   max-width: 1800px;
@@ -108,11 +111,11 @@ a {
 }
 
 @keyframes view-in {
-  0% {}
-  50% {
+  0% , 50% {
     opacity: 0;
     transform: translate(0, 200px);
   }
+
   100% {
     opacity: 1;
     transform: translate(0, 0);
@@ -120,14 +123,13 @@ a {
 }
 
 @keyframes view-out {
-  0% {
+  0%,50% {
     transform: scale(1);
   }
-
-  50% {}
 
   100% {
     transform: scale(0.88)
   }
 }
+
 </style>

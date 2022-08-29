@@ -143,7 +143,7 @@ let LeaveMessageNum = ref(0);
 let CommentNum = ref(0);
 let TagsActive = ref('')
 const instance = getCurrentInstance(); // 获取当前实例  
-console.log("instance",instance);
+
 const Pagi = ref();
 const store = useStore();
 store.commit('ChangeActive',0)
@@ -174,7 +174,6 @@ let _getTagRed = async () => {
       Tags.value = res.data;
       DefaultGraph.ArticleTagPart = false;
     }
-    console.log(Tags);
 
   } catch (error) {
     console.error(error);
@@ -198,7 +197,6 @@ const GetArticle = async (ArticleTag: string) => {
       });
       DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
       ArticleList.value = res.data;
-      console.log(ArticleList.value);
       
     }
 
@@ -233,7 +231,6 @@ const UpdateRouter = (RouterName: string, articleMessage: { [key:string]:any }) 
     });
   }
 }
-console.log("SetUpdate",Pagi);
 const ValueByPagition = async (SelectPage:number) => {
   //获取子组件的值
   store.commit('ChangeLoading',true)
@@ -252,11 +249,9 @@ const ValueByPagition = async (SelectPage:number) => {
       });
       // DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
       ArticleList.value = ArticleList.value.concat(res.data);
-      console.log("========》",Pagi.value);
       if(res.data.length !=8) {
         AticleBottom.value = true;
         // 移除滚动监听
-        console.log("value",Pagi.value);
         
         Pagi.value.SetUpdate(false);
       } else {

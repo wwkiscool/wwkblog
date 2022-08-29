@@ -1,5 +1,5 @@
 <template>
-<div class="g-scroll" id="g-scroll"></div>
+	<!-- <div class="g-scroll" id="g-scroll"></div>
 <div class="g-wrap">
     <div class="g-bg"></div>
     <div class="g-container">
@@ -7,9 +7,171 @@
         <div class="g-mask"></div>
         <div class="g-logo"></div>
     </div>
-</div>
+</div> -->
+	<div class="index-page">
+		<div class="header-banner-outer index-aboutme">
+			<div :class="['header-banner', photographyLoaded ? 'zoom-show' : '']" :style="{
+				backgroundImage: `url(${photography['imgSrc']})`
+			}">
+				<!-- <div class="photograghy-author">
+			<a :href="photography['htmlSrc']" target="_blank">{{photography['title']}} By:@{{photography.author}}</a>
+		</div> -->
+				<div class="aboutme-body">
+					<div class="container">
+						<h2>
+							你好！
+							<br>我是
+							<strong>wwk</strong>
+						</h2>
+						<h3>你是谁？</h3>
+						<p>97年，前端工程师，全栈开发尝试者</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
+
+<script setup lang="ts" >
+import { ref, Ref } from "vue";
+interface photoGraphaList {
+	title: string,
+	author: string,
+	imgSrc: string,
+	htmlSrc?: string
+}
+const getImg = (val: number): string => {
+	let url = new URL(`../../static/img/home/back${val}.jpg`, import.meta.url).href
+	return url
+}
+let photoGraphaList: Ref<photoGraphaList[]> = ref([
+	{
+		title: "随处撸码",
+		author: "wwk",
+		imgSrc: getImg(1)
+	}
+]);
+let photoGraphaIndex: Ref<number> = ref(0);
+let photographyLoaded = ref(false);
+let photography: Ref<photoGraphaList | any> = ref()
+photography.value = photoGraphaList.value[photoGraphaIndex.value]
+
+function loadImg(src: string, callback: any) {
+	if (!src) {
+		callback && callback();
+		return;
+	}
+	let img = new Image();
+	function End() {
+		callback && callback();
+		callback = null;
+	}
+	img.onerror = img.onload = End;
+	img.src = src;
+}
+loadImg(photography.value.imgSrc, () => {
+
+	setTimeout(() => {
+		photographyLoaded.value = true
+	}, 1500)
+})
+</script>
+
 <style scoped lang="less">
+@keyframes circle_zoom {
+	0% {
+		opacity: 0;
+		mask-size: 30%;
+	}
+
+	40% {
+		opacity: 0.6;
+		mask-size: 60%;
+	}
+
+	100% {
+		opacity: 1;
+		mask-size: 300%;
+	}
+}
+
+.index-page .index-aboutme {
+	height: 95vh;
+	min-height: 600px;
+}
+
+.header-banner-outer {
+	height: 100%;
+	min-height: 200px;
+	overflow: hidden;
+	background: #eee;
+
+	.header-banner {
+		position: relative;
+		height: 100%;
+		background: no-repeat center center #f4f1ec;
+		background-size: auto 100%;
+		visibility: hidden;
+		background-size: cover;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: url("../../static/img/home/mask.png");
+			z-index: 0;
+		}
+	}
+
+	.zoom-show {
+		display: block;
+		visibility: visible;
+		-webkit-mask-image: url("../../static/img/home/mask-bj.png");
+		-webkit-mask-repeat: no-repeat;
+		-webkit-mask-position: center center;
+		-webkit-mask-size: 300%;
+		-webkit-animation: circle_zoom 1.2s ease-in;
+	}
+}
+
+.aboutme-body {
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 80%;
+	color: #fff;
+
+	h2 {
+		margin: 0;
+		padding-left: 10px;
+		line-height: 1.5em;
+		font-weight: 200;
+		font-size: 2em;
+	}
+
+	h3 {
+		margin: 0;
+		padding-left: 10px;
+		line-height: 1.5em;
+		font-weight: 200;
+		font-size: 3em;
+
+		strong {
+			font-weight: 500;
+		}
+	}
+
+	p {
+		padding-left: 10px;
+		margin: 1.5em 0 1em;
+		font-size: 1.1em;
+	}
+}
+</style>
+<!-- <style scoped lang="less">
 //wegame.gtimg.com/g.55555-r.c4663/wegame-home/sc01-logo.52fe03c4.svg
 
 html, body {
@@ -130,4 +292,4 @@ body {
         transform: scale(60);
     }
 }
-</style>
+</style> -->
