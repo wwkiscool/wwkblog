@@ -55,6 +55,9 @@
 						target="_blank">博客源码</a></p>
 			</div>
 		</section>
+		<section class="index-about-footer">
+			end
+		</section>
 	</div>
 </template>
 
@@ -410,6 +413,11 @@ loadImg(photography.value.imgSrc, () => {
 			}
 		}
 	}
+}
+.index-about-footer{
+	background: #fff;
+	text-align: center;
+	padding: 20px;
 }
 </style>
 <!-- <style scoped lang="less">

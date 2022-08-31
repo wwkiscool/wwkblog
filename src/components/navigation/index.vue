@@ -26,7 +26,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch, Ref } from "vue";
+import { ref, onMounted, watch, Ref,onBeforeUnmount } from "vue";
 import { useRoute } from "vue-router";
 interface navList {
     label: string,
@@ -70,7 +70,11 @@ function scrollListener() {
 }
 onMounted(() => { // mounted 生命周期
     ajustNavigation();
-    scrollListener();
+    window.addEventListener('scroll',scrollListener)
+})
+onBeforeUnmount(() => {
+    // 组件销毁
+    window.removeEventListener('scroll', scrollListener)
 })
 
 watch(() => route.path, (newPath) => {
