@@ -18,10 +18,10 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:'http://139.196.56.93/',
+        target:'http://139.196.56.93/api',
         changeOrigin:true,
         rewrite:path=>{
-          return path.replace(/^\/api/,'')
+          return path.replace(/^\/api/,'/')
         }
       }
     }
