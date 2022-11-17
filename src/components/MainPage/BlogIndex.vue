@@ -1,6 +1,6 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <div>
+    <div class="blog-index-page">
       <!-- <div class="TopBarHeight"></div> -->
       <div class="BlogIndexContent">
         <div class="BlogFlex">

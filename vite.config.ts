@@ -6,16 +6,21 @@ import viteCompression  from "vite-plugin-compression"
 // https://vitejs.dev/config/
 export default defineConfig({
   base:"./",
-  plugins: [vue(),viteCompression({
+  
+  plugins: [vue()
+    ,
+    viteCompression({
     ext: ".gz",
     deleteOriginFile: false // 是否删除原始文件
-  })],
+  })
+],
   resolve:{
     alias:{
       '@':path.resolve(__dirname,"src")
     }
   },
   server:{
+    host: "0.0.0.0",
     proxy:{
       '/api':{
         target:'http://139.196.56.93/api',

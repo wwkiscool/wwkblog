@@ -27,7 +27,6 @@ import CanvasBac from './components/BrotherComponent/CanvasBac.vue'
 import AirPlane from './components/BrotherComponent/AirPlane.vue'
 import { watchEffect,toRefs,ref } from 'vue'
 import { useRoute } from "vue-router"
-import { log } from "console";
 const { path } = toRefs(useRoute())
 console.log(path.value);
 
@@ -36,7 +35,6 @@ const navWhiteList = ref(['/tian'])
 const navShow = ref(true)
 
 watchEffect(  () => {
-  console.log(path.value,"1111111111");
   if(navWhiteList.value.includes(path.value)) {
     navShow.value = false
   }
@@ -110,6 +108,7 @@ a {
 
 .view-outer {
   min-height: 100vh;
+  // height: 100vh;
   overflow: hidden;
 }
 
