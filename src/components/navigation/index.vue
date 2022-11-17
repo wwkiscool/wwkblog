@@ -50,11 +50,13 @@ let navList: Ref<navList[]> = ref([
         label: "关于",
         href: "/AboutMe",
         type: "about"
-    }, {
-        label: "时间轴",
-        href: "/TimeLine",
-        type: "timeline"
-    }, {
+    },
+    //  {
+    //     label: "时间轴",
+    //     href: "/TimeLine",
+    //     type: "timeline"
+    // },
+     {
         label: "留言",
         href: "/MessageBoard",
         type: "message"

@@ -8,7 +8,7 @@
     <CanvasBac></CanvasBac>
     <AirPlane></AirPlane>
   </div> -->
-  <Navigation></Navigation>
+  <Navigation v-show="navShow"></Navigation>
   <div class="view-outer">
     <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
       <router-view class="view-page" />
@@ -25,6 +25,23 @@ import Footer from "./components/BrotherComponent/Footer.vue";
 import Loading from "./components/BrotherComponent/Loading.vue";
 import CanvasBac from './components/BrotherComponent/CanvasBac.vue'
 import AirPlane from './components/BrotherComponent/AirPlane.vue'
+import { watchEffect,toRefs,ref } from 'vue'
+import { useRoute } from "vue-router"
+import { log } from "console";
+const { path } = toRefs(useRoute())
+console.log(path.value);
+
+// 导航 不需要的白名单
+const navWhiteList = ref(['/tian'])
+const navShow = ref(true)
+
+watchEffect(  () => {
+  console.log(path.value,"1111111111");
+  if(navWhiteList.value.includes(path.value)) {
+    navShow.value = false
+  }
+  
+})
 function afterLeave() {
 
 }

@@ -54,11 +54,11 @@ const routes = [
       title:"关于我-嘎嘎帅"
     }
   }
-  // ,{
-  //     path:'/analytics',
-  //     name:'analytics',
-  //     component:analytics
-  //   }
+  ,{
+      path:'/tian',
+      name:'tian',
+      component:defineAsyncComponent(() => import('@/tian-ui/components/demo.vue'))
+    }
 ]
 
 const router = createRouter({
