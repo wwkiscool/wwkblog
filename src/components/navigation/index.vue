@@ -13,7 +13,7 @@
                     <span>我的博客</span>
                 </router-link>
                 <div class="nav-list">
-                    <Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
+                    <button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></button>
                     <div class="nav-mask" @click="navSlidedown = false"></div>
                     <div class="nav-list-body">
                         <router-link to="/" class="index-page">首页</router-link>

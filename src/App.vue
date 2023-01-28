@@ -10,9 +10,14 @@
   </div> -->
   <Navigation v-show="navShow"></Navigation>
   <div class="view-outer">
-    <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
+    <router-view v-slot="{ Component }" class="view-page">
+      <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
+    <!-- <transition name="view-animate" @beforeLeave="beforeLeave" @afterLeave="afterLeave">
       <router-view class="view-page" />
-    </transition>
+    </transition> -->
   </div>
 
 </template>
