@@ -10,7 +10,7 @@
                         <path
                             d="m1636.55 1484.58a211.6 211.6 0 0 1 -250.18 54.76 801.031 801.031 0 0 0 -775.466 1.51 211.855 211.855 0 0 1 -247.233-55.97 796.437 796.437 0 0 1 -163.671-484.88c0-441.828 358.172-800 800-800s800 358.172 800 800a796.409 796.409 0 0 1 -163.45 484.58zm-636.55-884.58c-220.914 0-400 179.086-400 400s179.086 400 400 400 400-179.09 400-400-179.09-400-400-400z" />
                     </svg>
-                    <span>我的博客</span>
+                    <span>我的家</span>
                 </router-link>
                 <div class="nav-list">
                     <button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></button>
@@ -60,6 +60,10 @@ let navList: Ref<navList[]> = ref([
         label: "留言",
         href: "/MessageBoard",
         type: "message"
+    },{
+        label: "工具",
+        href: "/tools",
+        type: "tools"
     }
 ]);
 let navSlidedown = ref(false);
