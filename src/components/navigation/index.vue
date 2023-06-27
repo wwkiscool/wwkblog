@@ -26,7 +26,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch, Ref,onBeforeUnmount } from "vue";
+import { ref, onMounted, watch, Ref, onBeforeUnmount } from "vue";
 import { useRoute } from "vue-router";
 interface navList {
     label: string,
@@ -56,11 +56,11 @@ let navList: Ref<navList[]> = ref([
     //     href: "/TimeLine",
     //     type: "timeline"
     // },
-     {
+    {
         label: "留言",
         href: "/MessageBoard",
         type: "message"
-    },{
+    }, {
         label: "工具",
         href: "/tools",
         type: "tools"
@@ -76,7 +76,7 @@ function scrollListener() {
 }
 onMounted(() => { // mounted 生命周期
     ajustNavigation();
-    window.addEventListener('scroll',scrollListener)
+    window.addEventListener('scroll', scrollListener)
 })
 onBeforeUnmount(() => {
     // 组件销毁
@@ -133,6 +133,9 @@ watch(() => route.path, (newPath) => {
     height: 56px;
     margin: 0 -10px;
     background: #fff;
+    border-radius: 6px;
+        overflow: hidden;
+
 }
 
 .navigation .nav-logo {
@@ -229,6 +232,8 @@ watch(() => route.path, (newPath) => {
 
     .navigation .nav-inner {
         margin-left: -10px;
+        border-radius: 0;
+        
     }
 
     .navigation .nav-list-body {

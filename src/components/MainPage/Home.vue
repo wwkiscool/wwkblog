@@ -1,28 +1,14 @@
 <template>
-  <!-- <div class="g-scroll" id="g-scroll"></div>
-<div class="g-wrap">
-    <div class="g-bg"></div>
-    <div class="g-container">
-        <div class="g-wegame"></div>
-        <div class="g-mask"></div>
-        <div class="g-logo"></div>
-    </div>
-</div> -->
   <div class="index-page">
     <div class="header-banner-outer index-aboutme">
       <div :class="['header-banner', photographyLoaded ? 'zoom-show' : '']" :style="{
         backgroundImage: `url(${photography['imgSrc']})`
       }">
-        <!-- <div class="photograghy-author">
-					<a :href="photography['htmlSrc']" target="_blank">{{photography['title']}} By:@{{photography.author}}</a>
-				</div> -->
         <div class="aboutme-body">
           <div class="container">
             <h2 class="h2">
               <strong>爱战胜不了任何东西，而且万物皆有终结</strong>
             </h2>
-            <!-- <h3>xxx</h3>
-						<p>97年，前端工程师，全栈开发尝试者</p> -->
           </div>
         </div>
 
@@ -32,10 +18,6 @@
     <section class="index-about-design">
       <h3>多视图 + 响应式设计</h3>
       <p>配合单页架构营造顺滑体验</p>
-      <!-- <div class="links">
-						单页组件<a href="http://bh-lay.github.io/lofox/index.html" target="_blank">lofox.js</a>
-						<a href="http://bh-lay.github.io/iframer/app.html" target="_blank">iframer</a>
-					</div> -->
       <div class="device-cnt">
         <div class="device mobile"><span></span><i></i><i></i></div>
         <div class="device pc"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -60,7 +42,7 @@
 
 <script setup lang="ts" >
 import { ref, Ref } from "vue";
-import  back from '@/utils/constant/home-back'
+import back from '@/utils/constant/home-back'
 interface photoGraphaList {
   title: string,
   author: string,
@@ -111,21 +93,25 @@ loadImg(photography.value.imgSrc, () => {
 @keyframes showup {
   from {
     letter-spacing: -28px;
-    filter:blur(10px)
+    filter: blur(10px)
   }
+
   to {
     letter-spacing: 5px;
     filter: blur(0px);
   }
 }
+
 .h2 {
   filter: contrast(30);
   // background-color: #000;
   text-align: center;
+
   strong {
-    animation:  showup 1.67s forwards;
+    animation: showup 1.67s forwards;
   }
 }
+
 @keyframes circle_zoom {
   0% {
     opacity: 0;

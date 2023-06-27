@@ -6,7 +6,7 @@ let baseURL = import.meta.env.VITE_BASE_URL
 
 const service = axios.create({
     baseURL,
-    timeout:1000 * 6 * 3,
+    timeout:1000 * 60 * 3,
     withCredentials:true
 })
 
